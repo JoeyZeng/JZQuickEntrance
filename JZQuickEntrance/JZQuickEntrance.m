@@ -42,14 +42,14 @@ static JZSuspendView *s_suspendView;
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Method fromMethod = class_getInstanceMethod(self, @selector(setRootViewController:));
-        Method toMethod = class_getInstanceMethod(self, @selector(qe_setRootViewController:));
+        Method fromMethod = class_getInstanceMethod(self, @selector(makeKeyAndVisible));
+        Method toMethod = class_getInstanceMethod(self, @selector(qe_makeKeyAndVisible));
         method_exchangeImplementations(fromMethod, toMethod);
     });
 }
 
-- (void)qe_setRootViewController:(UIViewController *)rootViewController {
-    [self qe_setRootViewController:rootViewController];
+- (void)qe_makeKeyAndVisible {
+    [self qe_makeKeyAndVisible];
     [JZQuickEntrance showInWindow];
 }
 
