@@ -7,8 +7,8 @@ A tool for prject developing. An Entrance for any viewcontroller in project.
 ![shortcut1](https://github.com/JoeyZeng/JZQuickEntrance/blob/master/shortcut/QQ20180727-141800.png)
 - Showing up a list of all viewcontrollers when clicking the suspend button.
 ![shortcut2](https://github.com/JoeyZeng/JZQuickEntrance/blob/master/shortcut/QQ20180727-141859.png)
-- Now, you can find or the viewcontroller you want to enter. Default initializion is **new** and enter by **push**. Otherwhise, config by adding:
-```
+- Now, you can find the viewcontroller you want to enter by searching or in hostory. Default initializion is `new` and enter by `push`. Otherwise, config by adding:
+```objc
 @protocol JZQuickEntranceDelegate <NSObject>
 @optional
 + (instancetype)instanceForQuickEntrance;
