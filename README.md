@@ -24,6 +24,13 @@ A tool for prject developing. An Entrance for any viewcontroller in project.
 + (NSUInteger)entranceTypeForQuickEntrance {
     return 2;
 }
+
++ (void)customEnterActionForQuickEntrance:(UINavigationController *)nc {
+    UIViewController *vc = [UIViewController new];
+    nc.definesPresentationContext = YES;
+    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [nc presentViewController:vc animated:NO completion:nil];
+}
 ```
 - There is a quick way to enter last viewcontroller by double click the suspend button.
 

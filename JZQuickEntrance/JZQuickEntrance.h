@@ -18,12 +18,17 @@ typedef NS_ENUM(NSUInteger, JZEntranceType) {
 @optional
 + (instancetype)instanceForQuickEntrance;
 + (NSUInteger)entranceTypeForQuickEntrance;
+
++ (void)customEnterActionForQuickEntrance:(UINavigationController *)nc;
 @end
 
 @interface JZQuickEntrance : NSObject
 
 + (void)showInWindow;
 + (void)hide;
+
+// default load main bundle vcs, addition for other framework, params for exp is "UIView"
++ (void)addLoadImageClassName:(NSArray <NSString *>*)imageClassNames;
 
 @end
 

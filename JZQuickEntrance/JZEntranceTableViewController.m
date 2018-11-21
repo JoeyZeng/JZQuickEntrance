@@ -66,17 +66,20 @@
         classes = objc_copyClassNamesForImage(info.dli_fname, &count);
         
         NSMutableArray *vcs = [NSMutableArray new];
-        // reverse traversal, so as the newest class arrange at first
-        for (int i = count-1; i >= 0; i--) {
-            //        NSLog(@"Class Name: %s", classes[i]);
-            NSString *className = [NSString stringWithCString:classes[i] encoding:NSUTF8StringEncoding];
-            Class class = NSClassFromString (className);
-            if ([class isSubclassOfClass:[UIViewController class]]) {
-                if (![className isEqualToString:NSStringFromClass([JZEntranceTableViewController class])]) {
-                    [vcs addObject:className];
-                }
+        
+        // add main bundle vcs
+        [self addClassNames:classes toArray:&vcs count:count];
+
+        // add other framework vcs
+        NSArray <NSString*>* classNames = [JZHelper shared].additionImageClassNameArray;
+        if (classNames.count > 0) {
+            for (NSString *className in classNames) {
+                const char * image = class_getImageName(NSClassFromString(className));
+                classes = objc_copyClassNamesForImage(image, &count);
+                [self addClassNames:classes toArray:&vcs count:count];
             }
         }
+        
         NSLog(@"Class Count: %ld", vcs.count);
         self.allDataArray = vcs;
         self.searchDataArray = vcs;
@@ -87,7 +90,20 @@
             [self.tableView reloadData];
         });
     });
-    
+}
+
+- (void)addClassNames:(const char **)classNames toArray:(NSMutableArray **)array count:(int)count {
+    // reverse traversal, so as the newest class arrange at first
+    for (int i = count-1; i >= 0; i--) {
+        //        NSLog(@"Class Name: %s", classes[i]);
+        NSString *className = [NSString stringWithCString:classNames[i] encoding:NSUTF8StringEncoding];
+        Class class = NSClassFromString (className);
+        if ([class isSubclassOfClass:[UIViewController class]]) {
+            if (![className isEqualToString:NSStringFromClass([JZEntranceTableViewController class])]) {
+                [*array addObject:className];
+            }
+        }
+    }
 }
 
 - (void)refreshHistory {

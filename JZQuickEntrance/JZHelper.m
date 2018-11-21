@@ -131,6 +131,12 @@
     }
     
     // enter
+    
+    if ([class respondsToSelector:@selector(customEnterActionForQuickEntrance:)]) {
+        [class customEnterActionForQuickEntrance:nc];
+        return;
+    }
+    
     JZEntranceType entranceType = JZEntranceTypePush;
     if ([class respondsToSelector:@selector(entranceTypeForQuickEntrance)]) {
         entranceType = [class entranceTypeForQuickEntrance];

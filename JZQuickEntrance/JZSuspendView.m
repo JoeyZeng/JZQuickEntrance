@@ -55,7 +55,7 @@
 }
 
 - (void)didMoveToSuperview {
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:.5 animations:^{
         self.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:.1];
     }];
 }

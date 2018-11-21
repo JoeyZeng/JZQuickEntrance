@@ -9,6 +9,7 @@
 #import "JZQuickEntrance.h"
 #import "JZSuspendView.h"
 #import <objc/runtime.h>
+#import "JZHelper.h"
 
 @implementation JZQuickEntrance
 
@@ -32,6 +33,10 @@ static JZSuspendView *s_suspendView;
     if (s_suspendView) {
         [s_suspendView removeFromSuperview];
     }
+}
+
++ (void)addLoadImageClassName:(NSArray <NSString *>*)imageClassNames {
+    [JZHelper shared].additionImageClassNameArray = imageClassNames;
 }
 
 @end

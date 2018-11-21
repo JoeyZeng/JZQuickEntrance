@@ -18,6 +18,8 @@ static const int kHistoryLimit = 5;
 
 @property (nonatomic, strong) NSArray <NSString *>*historyClassArray;   // count limit is 5
 
+@property (nonatomic, strong) NSArray <NSString *>*additionImageClassNameArray; // default load main bundle vcs, addition for other framework
+
 + (instancetype)shared;
 
 + (void)quickEnterViewControllerWithClassName:(NSString *)className navigationController:(UINavigationController *)nc;
